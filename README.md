@@ -26,7 +26,7 @@ To visit the home page, go to the brower enter the URL: http://localhost:8080/in
 2. Requirement 3 (load country table)
     - explain the purpose of the program and technologies being implemented<br>
     <div style="text-align: center;"><img src="documentation/images/3-1.png"></div>
-    <center>Purpose and technologies</center><br>
+    <p align=center>Purpose and technologies</p><br>
 
     - load the table with file read notifications<br>
     <div style="text-align: center;"><img src="documentation/images/3-2.png"></div>
