@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Country Table</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+        
+        <style type="text/css">
+            .header {
+                background-color: #333333;
+                color: white;
+                width: 100%;
+                padding: 15px;
+                margin-bottom: 10px;
+                left: 0;
+                right: 0;
+                top: 0;
+                font-size: x-large;
+                vertical-align: center;
+            }
+
+            .main-title {
+                padding: 10px;
+            }
+
+            .footer {
+                background-color: #333333;
+                color: white;
+                position: fixed;
+                width: 100%;
+                padding: 10px;
+                left: 0;
+                right: 0;
+                z-index: 2000;
+                bottom: 0;
+                font-size: small;
+                text-align: center;
+            }
+
+            .text {
+                padding: 1rem;
+                width: 100%;
+                position: relative;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <header id="header" class="header">
+            <span id="main-title" class="main-title">Country Table</span>
+        
+            <div style="float: right;" class="dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Navigation
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#paragraphs">Paragraphs</a></li>
+                    <li><a class="dropdown-item" href="#countryButton">Country Table</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- Paragraphs Start -->
+        <div id="paragraphs" style="margin-top: 20px;">
+            <div id="purpose">
+                <h2 style="text-align: center;">Purpose of this website</h2>
+                <p style="margin:0 auto; margin-bottom: 35px; width: 60%;">
+                    This website uses AJAX to access JSON files from the server and uses jQuery to dynamically add the retrieved data to the web page.
+                    <br>
+                    The content of this website is to show information from different countries.
+                </p>
+            </div>
+            
+            <div id="technologies" style="margin:0 auto; width: 60%; background: #ffffff;">
+                <h2 style="text-align: center;">Technologies being implemented</h2>
+                <h5 style="text-align: center;">jQuery</h5>
+                <p style="margin-bottom: 25px;">
+                    jQuey encapsulates the commonly used functions in JavaScript, provides simple JavaScript operations, and optimises HTML document operations, event processing, animation design and AJAX operations.
+                    <br>
+                    jQuery provides a good CSS selector and encapsulates a large number of commonly used DOM operations, making development easier.
+                </p>
+                <h5 style="text-align: center;">AJAX</h5>
+                <p style="margin-bottom: 25px;">
+                    AJAX is "Asynchronous JavaScript and XML", the main purpose of AJAX is to partially exchange data between the client and the server.
+                    <br>
+                    Traditional web applications will return a new page when the user completes the operation to update the page. This approach wastes a lot of bandwidth, because most of the HTML code in the two pages is often the same.
+                    AJAX only send and retrieve necessary data from the server and use JavaScript on the client side to process the response from the server. 
+                    <br>
+                    Therefore, the server response will become faster because less data is exchanged between the server and the browser.
+                </p>
+                <h5 style="text-align: center;">JSON</h5>
+                <p>
+                    JSON is "JavaScript Object Notation", its a lightweight data exchange format.
+                    <br>
+                    JSON is a good data interchange language because of its cleanliness and clear hierarchy. It is easy for people to read and write, and it is also easy for machines to parse and generate, and it can effectively improve the efficiency of network transmission.
+                </p>
+            </div>
+        </div>
+        <!-- Paragraphs End -->
+
+        <!-- Effect Button Start -->
+        <div id="effectButtonContainer" class="container text-center" style="text-align: center; margin-top: 20px;">
+            <div class="row justify-content-md-center">
+                <div class="col col-3">
+                    <p>Scale Purpose</p>
+                    <button id="effectButton1" class="btn btn-primary" onclick="scalePurpose()">Hide Purpose</button>
+                </div>
+                <div class=" col col-3">
+                    <p>Paragraphs narrow and widen</p>
+                    <button id="effectButton2" class="btn btn-primary" onclick="animateTechnologiesNarrow()">Narrow</button>
+                    <button id="effectButton3" class="btn btn-primary" onclick="animateTechnologiesWiden()">Widen</button>
+                </div>
+                <div class=" col col-3">
+                    <p>Change theme colour</p>
+                    <button id="effectButton4" class="btn btn-primary" onclick="changeThemeColour()">Change Colour</button>
+                    <button id="effectButton5" class="btn btn-primary visually-hidden" onclick="resetThemeColour()">Reset</button>
+                </div>
+            </div>
+        </div>
+        <!-- Effect Button End -->
+
+        <!-- Alert Start -->
+        <div id="liveAlertPlaceholder" style="text-align: center; margin-top: 40px;"></div>
+        <!-- Alert End -->
+
+        <!-- Load Table Button Start -->
+        <div id="countryButtonContainer" style="text-align: center; margin-top: 40px;">
+            <button id="countryButton" class="btn btn-primary" onclick="loadTable()">Load Table</button>
+        </div>
+        <!-- Load Table Button End -->
+
+        <!-- Table Start -->
+        <div id="countryTableContainer">
+            <div id="draggable" class="ui-widget-content" style="margin: auto; margin-top: 10px; text-align: center; width: 180px; height: 120px;">
+                <p>Please Drag Me</p>
+                <button id="effectButton6" class="btn btn-primary" onclick="bounce()">Bounce</button>
+                <p style="margin-top: 15px;">Select a cell and click</p>
+            </div>
+            <div id="rowButton" style="margin:0 auto; margin-bottom: 25px; width: 60%;">
+                <select id="selectButton" class="form-select" style="width: 80px;  float: right;"  aria-label="Default select example" onchange="recreateTable(this)">
+                    <option selected>20</option>
+                    <option>all</option>
+                </select>
+            </div>
+            <br>
+            <table class="table table-striped" style="margin:0 auto; margin-top: 25px; margin-bottom: 25px; width: 75%; text-align: center;">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Captial City</th>
+                        <th scope="col">Continent</th>
+                        <th scope="col">Costline</th>
+                        <th scope="col">Currency Name</th>
+                        <th scope="col" style="width: 15%">Domain tld</th>
+                        <th scope="col">Flag</th>
+                    </tr>
+                </thead>
+                <tbody id="mainTable">
+                </tbody>
+            </table>
+        </div>
+        <!-- Table End -->
+
+        <!-- Table Placeholder Start -->
+        <div id="tableHolder" class="visually-hidden">
+            <table class="table" style="margin:0 auto; margin-top: 25px; margin-bottom: 25px; width: 60%;">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Captial City</th>
+                    <th scope="col">Continent</th>
+                    <th scope="col">Costline</th>
+                    <th scope="col">Currency Name</th>
+                    <th scope="col">Domain tld</th>
+                    <th scope="col">Flag</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Table Placeholder End -->
+
+        <!-- Footer Start -->
+        <div style="margin-top: 100px;"></div>
+        <footer id="footer" class="footer">
+            Yushun Zeng 2023 | Country Table
+        </footer>
+        <!-- Footer End -->
+
+        <!-- Scripts Start -->
+        <!-- Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <!-- jQuery UI -->
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    
+        <script>
+            $(document).ready(function() {
+                $.getScript({
+                    url:"./index.js",
+                    success: function(data) {
+                        $("body").append("<script>");
+                        js = $("body").children(":last");
+                        js.append(data)
+                    }
+                })
+            })
+        </script>
+        <!-- Scripts End -->
+    </body>
+</html>
