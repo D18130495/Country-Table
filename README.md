@@ -33,7 +33,7 @@ To visit the home page, go to the brower enter the URL: http://localhost:8080/in
     <center>File read notification</center><br>
 
     - table create time and change row display<br>
-    <div style="text-align: center;"><img src="documentation/images/3-3.png"></div>
+    <div align=center"><img src="documentation/images/3-3.png"></div>
     <center>Table create time and change row display</center><br>
 
 3. Requirement 4 (jQuery effects)
