@@ -30,7 +30,7 @@ To visit the home page, go to the brower enter the URL: http://localhost:8080/in
 
     - load the table with file read notifications<br>
     <div align=center><img src="documentation/images/3-2.png"></div>
-    <center>File read notification</center><br>
+    <p align=center>File read notification</p><br>
 
     - table create time and change row display<br>
     <div align=center"><img src="documentation/images/3-3.png"></div>
