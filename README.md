@@ -37,12 +37,36 @@ To visit the home page, go to the brower enter the URL: http://localhost:8080/in
     <p align=center>Table create time and change row display</p><br>
 
 3. Requirement 4 (jQuery effects)
-    -
-    -
-    -
-    -
-    -
-    -
+    1. Scale to show and hide "purpose" section
+        <br>Purpose section can be shown or hidden
+    <div align=center><img src="documentation/images/4-1.png"></div>
+    <p align=center>Hidden "purpose" section</p><br>
+
+    2. Narrow or Widen "paragraphs" section
+        <br>Paragraphs section can change the wide
+    <div align=center><img src="documentation/images/4-2.png"></div>
+    <p align=center>Narrow the "paragraphs" section</p><br>
+
+    3. Change "header" and "footer" colour theme
+        <br>Header and Footer colour theme can be changed
+    <div align=center><img src="documentation/images/4-3.png"></div>
+    <p align=center>Change "header" and "footer" colour theme</p><br>
+
+    4. Change image gray scale with hover
+        <br>Image can change grayscale
+    <div align=center><img src="documentation/images/4-4.png"></div>
+    <p align=center>Image can change grayscale</p><br>
+    
+    5. Zoom in the image and show more information
+        <br>Image can zoom in and display more information
+    <div align=center><img src="documentation/images/4-5.png"></div>
+    <p align=center>Image display more information</p><br>
+
+    6. Drag button to zoom in, zoom out and change font style
+        <br>A button can be dragged wherever you want, and when you select a cell and click the button, the cell will zoom in and change style.
+    <div align=center><img src="documentation/images/4-6.png"></div>
+    <p align=center>Zoom in and change font style</p><br>
+
 
 4. Requirement 5 (select a specific cell of the table)
     - cell select and change colour<br>

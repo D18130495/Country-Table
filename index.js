@@ -75,6 +75,7 @@ function loadTable() {
         // change button text and empty the notification
         $("#countryButton").text("Load Table")
         $('#liveAlertPlaceholder').empty()
+        $('#mainTable').empty()
     }
 }
 
@@ -185,7 +186,7 @@ function createTable(json, row) {
         }
     })
 
-    // click outside the table
+    // click outside the table and drag button
     $("body").click(function(e) {
         var event = e || window.event;
         var target = event.target || event.srcElement;
@@ -211,12 +212,13 @@ function recreateTable(obj) {
 //  ---------------------  merge JSON  --------------------------
 function mergeJSON(a, b, key) {
     function x(a) {
-        a.forEach(function (b) {
-            if (!(b[key] in obj)) {
+        a.forEach(function(b) {
+            if(!(b[key] in obj)) {
                 obj[b[key]] = obj[b[key]] || {}
                 array.push(obj[b[key]])
             }
-            Object.keys(b).forEach(function (k) {
+
+            Object.keys(b).forEach(function(k) {
                 obj[b[key]][k] = b[k]
             })
         })
@@ -233,20 +235,21 @@ function mergeJSON(a, b, key) {
 // ---------------------  jQuery Effect ------------------------------
 // scale purpose
 function scalePurpose() {
+    // change button text
     if($("#effectButton1").text() === "Hide Purpose") {
         $("#effectButton1").text("Show Purpose")
     }else {
         $("#effectButton1").text("Hide Purpose")
     }
     
-    $("#purpose").toggle("scale", {percent: 50}, 800);
+    $("#purpose").toggle("scale", {percent: 50}, 800); // scale
 }
 
 // narrow and widen technologies
 function animateTechnologiesNarrow() {
-    minWidth = $("body").width() * 0.4
+    minWidth = $("body").width() * 0.4 // min wide
     
-    if($("#technologies").width() > minWidth) {
+    if($("#technologies").width() > minWidth) { // can not zoom out
         $("#technologies").animate({
             width: "-=8%"
         }, 500)
@@ -254,9 +257,9 @@ function animateTechnologiesNarrow() {
 }
 
 function animateTechnologiesWiden() {
-    maxWidth = $("body").width() * 0.9
+    maxWidth = $("body").width() * 0.9 // max wide
 
-    if($("#technologies").width() < maxWidth) {
+    if($("#technologies").width() < maxWidth) { // can not zoom in
         $("#technologies").animate({
             width: "+=8%"
         }, 500)
@@ -265,18 +268,18 @@ function animateTechnologiesWiden() {
 
 // change theme colour
 function changeThemeColour() {
-    colour = randomColor()
+    colour = randomColor() // get random colour
 
-    $("#header").css("background-color", colour)
-    $("#footer").css("background-color", colour)
-    $("#effectButton5").removeClass("visually-hidden")
+    $("#header").css("background-color", colour) // set header colour
+    $("#footer").css("background-color", colour) // set footer colour
+    $("#effectButton5").removeClass("visually-hidden") // display reset button
 }
 
 // reset theme colour
 function resetThemeColour() {
-    $("#header").css("background-color", "#333333")
-    $("#footer").css("background-color", "#333333")
-    $("#effectButton5").addClass("visually-hidden")
+    $("#header").css("background-color", "#333333") // set header to black
+    $("#footer").css("background-color", "#333333") // set footer to black
+    $("#effectButton5").addClass("visually-hidden") // hide reset button
 }
 
 // get random colour
@@ -296,29 +299,59 @@ $("#draggable").draggable()
 
 // cell bounce
 function bounce() {
-    $(".selectedCell").animate({ fontSize: '+=3px' }, 500)
-    $(".selectedCell").css('color', randomColor())
-    $(".selectedCell").css('font-weight', "600")
-    $(".selectedCell").animate({ fontSize: '-=3px' }, 300)
+    $(".selectedCell").animate({ fontSize: '+=3px' }, 500) // font zoom in
+    $(".selectedCell").css('color', randomColor()) // change font colour
+    $(".selectedCell").css('font-weight', "600") // change font size
+    $(".selectedCell").animate({ fontSize: '-=3px' }, 300) // font zoom out
 }
 
-// 
-// var state = true
+// change image gray
+function changeGray() {
+    $('.carousel-item').each(function() { // find all carousel item
+        if($(this).hasClass("active")) { // find active item
+            if($(this).find("img").hasClass("grayscale")) { // find if the image current gray
+                $(this).find("img").removeClass("grayscale") // remove gray
+                $('#effectButton6').text("Gray Image") // change text
+                $('#button6Info').text("Change Image Gray") // change text
+            }else {
+                $(this).find("img").addClass("grayscale") // add gray
+                $('#effectButton6').text("Colour Image") // change text
+                $('#button6Info').text("Try Hover on the Image!") // change text
+            }
+        }
+    })
+}
 
-// function animateTechnologies() {
-//     if(state) {
-//         $("#technologies").animate({
-//             background: "#aa0000",
-//             size: "80px",
-//             width: "+=5%"
-//         }, 500)
-//     }else {
-//         $("#technologies").animate({
-//             backgroundColor: "#aa0000",
-//             color: "#fff",
-//             width: "65%"
-//         }, 500)
-//     }
+// reset all carousel items
+function reset() {
+    $('.carousel-item').find("img").removeClass("grayscale")
+    $('#effectButton6').text("Gray Image")
+    $('#button6Info').text("Change Image Gray")
 
-//     state = !state
-// }
+    $("#imageContainer").animate({ width: '50%' }, 800)
+    $(".carousel-item").find("div").css("opacity", "0")
+    $('#effectButton7').text("Show More")
+}
+
+// zoom and display information
+function showMore() {
+    $('.carousel-item').each(function() { // find all carousel item
+        if($(this).hasClass("active")) { // find active item
+            if($(this).find("img").hasClass("showmore")) { // find if the image current gray
+                $("#imageContainer").animate({ width: '50%' }, 800) // small
+                $(this).find("img").removeClass("showmore") // remove active
+                
+                $(this).find("div").css("opacity", "0") // hide text
+
+                $('#effectButton7').text("Show More") // change text
+            }else {
+                $("#imageContainer").animate({ width: '55%' }, 800) // big
+                $(this).find("img").addClass("showmore") // add active
+                
+                $(this).find("div").css("opacity", "1") // shiow text
+                
+                $('#effectButton7').text("Show Less") // change text
+            }
+        }
+    })
+}
