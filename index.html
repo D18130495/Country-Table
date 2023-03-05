@@ -14,6 +14,7 @@
         <!-- Image Grayscale https://github.com/karlhorky/gray -->
         <link href="https://npmcdn.com/jquery-gray@1.7.0/css/gray.min.css" rel="stylesheet">
         
+        <!-- CSS style -->
         <style type="text/css">
             .header {
                 background-color: #333333;
@@ -148,11 +149,6 @@
         <!-- Effect Button End -->
 
         <!-- Image Start -->
-        <!-- <div id="imageContainer" style="text-align: center; margin-top: 40px;">
-            <img id="dublin" class="grayscale-fade" style="width: 60%;" src="https://upload.wikimedia.org/wikipedia/commons/4/42/Samuel_Beckett_Bridge_At_Sunset_Dublin_Ireland_%2897037639%29_%28cropped%29.jpeg">
-        </div> -->
-        <!-- Image End -->
-
         <div id="imageContainer" class="carousel slide carousel-fade" style="text-align: center; width: 50%; margin: auto; margin-top: 40px;">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#imageContainer" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" onclick="reset()"></button>
@@ -181,7 +177,8 @@
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
-          </div>
+        </div>
+        <!-- Image End -->
 
         <!-- Effect Button Start -->
         <div id="imageEffectButtonContainer" class="container text-center" style="text-align: center; margin-top: 20px;">
@@ -394,6 +391,7 @@
         <!-- Image Grayscale https://github.com/karlhorky/gray -->
         <script src="https://npmcdn.com/jquery-gray@1.7.0/js/jquery.gray.min.js"></script>
     
+        <!-- Import the index.js -->
         <script>
             $(document).ready(function() {
                 $.getScript({

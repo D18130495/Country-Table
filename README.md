@@ -5,12 +5,13 @@
 - [List the Parts that are Completed](#list-the-parts-that-are-completed)
 
 ## How to Open This Website:
-To visit the website, download the folder and open in the Visual Studio Code.
+To visit the website, download the folder and open in the Visual Studio Code or Terminal.
 <br>
 Open the terminal to current path and execute "node country.js", the server will start at http://localhost:8080.
 <div align=center><img src="documentation/images/1-1.png"></div>
 <br>
-To visit the home page, go to the brower enter the URL: http://localhost:8080/index.html
+To visit the home page, go to the brower enter the URL:
+http://localhost:8080/index.html
 <div align=center><img src="documentation/images/1-2.png"></div><br>
 
 ## List the Parts that are Completed

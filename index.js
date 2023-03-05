@@ -68,7 +68,9 @@ function loadTable() {
                 // alert message for how much time table has been created
                 alert('The table has been created and has taken ' + hour + ' hour ' + minute + ' minute ' + second + ' second ' + millisecond + ' millisecond', 'success')
                 
-                reset() // reset timer
+                // reset timer
+                reset()
+                hour = minute = second = millisecond = 0
             }, 3000)
         })
     }else {
@@ -98,31 +100,27 @@ const alert = (message, type) => {
 // -----------------  initial ----------------------
 // initial hide table
 $(document).ready(function() {
-    $("#countryTableContainer").hide();
+    $("#countryTableContainer").hide()
 });
 
 //  ----------------  timer  -----------------------
 var hour = minute = second = millisecond = 0
 var int
 
-function start()
-{
+function start() {
     int = setInterval(timer, 50)
 }
 
-function stop()
-{
+function stop() {
     window.clearInterval(int)
 }
 
-function reset()
-{
-    window.clearInterval(int);
-    hour = minute = second = millisecond = 0;
+function reset() {
+    window.clearInterval(int)
+    hour = minute = second = millisecond = 0
 }
 
-function timer()
-{
+function timer() {
     millisecond = millisecond + 50
     
     if(millisecond >= 1000)
@@ -164,23 +162,23 @@ function createTable(json, row) {
 
    // mouse hover change table color
    $("#mainTable td").mouseover(function() {
-        if($(this).css('background-color') !== "rgb(193, 222, 247)") {
+        if($(this).css('background-color') !== "rgb(193, 222, 247)") { // check if the cell selected, not add hover
             $(this).css("background-color", "#f0f8ff")
         }
-    }).mouseout(function () {
-        if($(this).css('background-color') !== "rgb(193, 222, 247)") {
+    }).mouseout(function () { // mouse out
+        if($(this).css('background-color') !== "rgb(193, 222, 247)") { // check if the cell selected, not remove colour
             $(this).removeAttr("style", "")
         }
     });
 
     // mouse click select function
     $("#mainTable td").click(function() {
-        if($(this).css('background-color') === "rgb(193, 222, 247)") {
+        if($(this).css('background-color') === "rgb(193, 222, 247)") { // already selected, remove select colour
             $(this).removeAttr("style", "")
             $(this).removeClass('selectedCell')
-        }else {
-            $("#mainTable td").removeAttr("style", "")
-            $(this).css("background-color", "#c1def7")
+        }else { // not selected
+            $("#mainTable td").removeAttr("style", "") // remove other colour
+            $(this).css("background-color", "#c1def7") // add slect colour
             $("#mainTable td").removeClass('selectedCell')
             $(this).addClass('selectedCell')
         }
@@ -188,9 +186,10 @@ function createTable(json, row) {
 
     // click outside the table and drag button
     $("body").click(function(e) {
-        var event = e || window.event;
-        var target = event.target || event.srcElement;
+        var event = e || window.event
+        var target = event.target || event.srcElement
         
+        // check if outside the table or drag button
         if(!document.getElementById("mainTable").contains(target) && !document.getElementById("draggable").contains(target)) {
             $("#mainTable td").removeAttr("style", "")
             $("#mainTable td").removeClass('selectedCell')
@@ -202,23 +201,23 @@ function createTable(json, row) {
 function recreateTable(obj) {
     if(obj.selectedIndex === 0) {
         $('#mainTable').empty()
-        createTable(finalMerge, 20)
+        createTable(finalMerge, 20) // create table, length is 20
     }else {
         $('#mainTable').empty()
-        createTable(finalMerge, finalMerge.length)
+        createTable(finalMerge, finalMerge.length) // create the dull table
     }
 }
 
 //  ---------------------  merge JSON  --------------------------
 function mergeJSON(a, b, key) {
     function x(a) {
-        a.forEach(function(b) {
-            if(!(b[key] in obj)) {
-                obj[b[key]] = obj[b[key]] || {}
-                array.push(obj[b[key]])
+        a.forEach(function(b) { // each item in first JSON
+            if(!(b[key] in obj)) { // check if the key in second JSON 
+                obj[b[key]] = obj[b[key]] || {} // if have value push this value else push {}
+                array.push(obj[b[key]]) // push all the key in both JSON
             }
 
-            Object.keys(b).forEach(function(k) {
+            Object.keys(b).forEach(function(k) { // each value in the sub JSON object
                 obj[b[key]][k] = b[k]
             })
         })
