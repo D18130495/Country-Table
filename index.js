@@ -43,35 +43,42 @@ function loadTable() {
         flag = $.getJSON("./country-objects/country-by-flag.json", "", function(flag) {
             alert('Flag has been read', 'success')
         });
-        
+
         // wait for ajax request
         $.when(capital && continent && costline && currency && domain && flag).done(function() {
-            // merge JSON data
-            firstMerge = mergeJSON(capital.responseJSON, continent.responseJSON, "country")
-            secondMerge = mergeJSON(firstMerge, costline.responseJSON, "country")
-            thirdMerge = mergeJSON(secondMerge, currency.responseJSON, "country")
-            forthMerge = mergeJSON(thirdMerge, domain.responseJSON, "country")
-            finalMerge = mergeJSON(forthMerge, flag.responseJSON, "country")
-           
-            // create table
-            createTable(finalMerge, 20)
-
+            // show the folder read completed
+            alert('Folder country-objects read completed', 'success')
+        
+            // wait 5 seconds to indicate files and folder read, and generate the table
             setTimeout(() => {
-                // display or hide row button, table, table place holder and change button text
-                $('#liveAlertPlaceholder').empty()
-                $("#countryButton").removeClass("visually-hidden")
-                $("#countryTableContainer").removeClass("visually-hidden")
-                $("#tableHolder").addClass("visually-hidden")
-
-                stop() // stop timer
-
-                // alert message for how much time table has been created
-                alert('The table has been created and has taken ' + hour + ' hour ' + minute + ' minute ' + second + ' second ' + millisecond + ' millisecond', 'success')
+                $.when(capital && continent && costline && currency && domain && flag).done(function() {
+                    // merge JSON data
+                    firstMerge = mergeJSON(capital.responseJSON, continent.responseJSON, "country")
+                    secondMerge = mergeJSON(firstMerge, costline.responseJSON, "country")
+                    thirdMerge = mergeJSON(secondMerge, currency.responseJSON, "country")
+                    forthMerge = mergeJSON(thirdMerge, domain.responseJSON, "country")
+                    finalMerge = mergeJSON(forthMerge, flag.responseJSON, "country")
                 
-                // reset timer
-                reset()
-                hour = minute = second = millisecond = 0
-            }, 3000)
+                    // create table
+                    createTable(finalMerge, 20)
+
+                    // display or hide row button, table, table place holder and change button text
+                    $('#liveAlertPlaceholder').empty()
+                    $("#countryButton").removeClass("visually-hidden")
+                    $("#countryTableContainer").removeClass("visually-hidden")
+                    $("#tableHolder").addClass("visually-hidden")
+
+                    // stop timer
+                    stop()
+
+                    // alert message for how much time table has been created
+                    alert('The table has been created(include files reading time) in ' + hour + ' hour ' + minute + ' minute ' + second + ' second ' + millisecond + ' millisecond', 'success')
+                    
+                    // reset timer
+                    reset()
+                    hour = minute = second = millisecond = 0
+                })
+            }, 5000)
         })
     }else {
         // change button text and empty the notification
